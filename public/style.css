@@ -151,6 +151,15 @@ pre {
     color: #cbd5e1;
 }
 
+#logs-output.error {
+    color: #ef4444;
+}
+
+.tab-btn.has-error {
+    color: #ef4444 !important;
+    border-bottom-color: #ef4444 !important;
+}
+
 #ptx-output,
 #sass-output {
     color: #a5f3fc;

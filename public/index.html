@@ -37,11 +37,15 @@
         <div class="sidebar">
             <div class="tabs">
                 <button class="tab-btn active" data-tab="output">Output</button>
+                <button class="tab-btn" data-tab="logs">Build Logs</button>
                 <button class="tab-btn" data-tab="ptx">PTX (ASM)</button>
                 <button class="tab-btn" data-tab="sass">SASS</button>
             </div>
             <div class="tab-content active" id="output-tab">
                 <pre id="console-output">Welcome to the CUDA Playground. Write your kernel and click Run.</pre>
+            </div>
+            <div class="tab-content" id="logs-tab">
+                <pre id="logs-output">// Build logs will appear here</pre>
             </div>
             <div class="tab-content" id="ptx-tab">
                 <pre id="ptx-output">// PTX will appear here after compilation</pre>

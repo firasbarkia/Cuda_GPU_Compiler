@@ -53,10 +53,14 @@ document.getElementById('runBtn').addEventListener('click', async () => {
     const code = editor.getValue();
     const loader = document.getElementById('loader');
     const consoleOutput = document.getElementById('console-output');
+    const logsOutput = document.getElementById('logs-output');
     const ptxOutput = document.getElementById('ptx-output');
     const sassOutput = document.getElementById('sass-output');
+    const logsTabBtn = document.querySelector('[data-tab="logs"]');
 
     loader.classList.remove('hidden');
+    logsTabBtn.classList.remove('has-error');
+    logsOutput.classList.remove('error');
 
     try {
         const response = await fetch('/api/run', {
@@ -68,12 +72,20 @@ document.getElementById('runBtn').addEventListener('click', async () => {
         const data = await response.json();
 
         // Update UI
-        consoleOutput.textContent = data.output || (data.success ? "Success (no output)" : "Error:\n" + data.error);
-        ptxOutput.textContent = data.emissions.ptx || "// No PTX emitted";
-        sassOutput.textContent = data.emissions.sass || "// No SASS emitted";
+        consoleOutput.textContent = data.output || (data.success ? "Success (no output)" : "// Executable failed or crashed");
+        logsOutput.textContent = data.error || (data.success ? "Compilation successful!" : "");
 
-        // Switch to output tab on completion
-        document.querySelector('[data-tab="output"]').click();
+        ptxOutput.textContent = data.emissions.ptx || "// PTX empty";
+        sassOutput.textContent = data.emissions.sass || "// SASS empty";
+
+        // Logic to switch tabs based on success/error
+        if (!data.success) {
+            logsTabBtn.classList.add('has-error');
+            logsOutput.classList.add('error');
+            logsTabBtn.click(); // Automatic switch to logs on error
+        } else {
+            document.querySelector('[data-tab="output"]').click(); // Switch to output on success
+        }
 
     } catch (err) {
         consoleOutput.textContent = "Fatal Error connecting to server: " + err.message;
