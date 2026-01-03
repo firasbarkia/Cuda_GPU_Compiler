@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUDA Playground</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs/loader.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-bolt"></i>
+            <span>CUDA<strong>Runtime</strong></span>
+        </div>
+        <div class="actions">
+            <button id="runBtn" class="btn-primary">
+                <i class="fas fa-play"></i> Run Code
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="editor-section">
+            <div class="section-header">
+                <i class="fas fa-code"></i> hello.cu
+            </div>
+            <div id="editor-container"></div>
+        </div>
+
+        <div class="sidebar">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="output">Output</button>
+                <button class="tab-btn" data-tab="ptx">PTX (ASM)</button>
+                <button class="tab-btn" data-tab="sass">SASS</button>
+            </div>
+            <div class="tab-content active" id="output-tab">
+                <pre id="console-output">Welcome to the CUDA Playground. Write your kernel and click Run.</pre>
+            </div>
+            <div class="tab-content" id="ptx-tab">
+                <pre id="ptx-output">// PTX will appear here after compilation</pre>
+            </div>
+            <div class="tab-content" id="sass-tab">
+                <pre id="sass-output">// SASS will appear here after compilation</pre>
+            </div>
+        </div>
+    </main>
+
+    <div id="loader" class="hidden">
+        <div class="spinner"></div>
+        <p>Compiling CUDA Kernel...</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

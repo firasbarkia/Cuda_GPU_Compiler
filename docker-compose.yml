@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  cuda-env:
+    build: .
+    container_name: cuda_web_env
+    ports:
+      - "3000:3000" # CUDA Playground
+    volumes:
+      - .:/workspace
+      - /workspace/node_modules
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - PASSWORD=cuda_secure_pass # Change this for the web IDE
+    restart: unless-stopped

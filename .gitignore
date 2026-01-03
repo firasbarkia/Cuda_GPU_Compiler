@@ -1,0 +1,17 @@
+# Binaries
+hello
+*.cubin
+*.exe
+*.out
+
+# Intermediate compiler emissions
+*.ptx
+*.sass
+
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
